@@ -45,7 +45,6 @@ define(function(require, exports, module) {
 
         var metaFilePath = TSCORE.Meta.findMetaFilebyPath(filePath, TSCORE.thumbFileExt);
         if (metaFilePath) {
-          //doc.thumbnail = encodeURI("file://" + metaFilePath);
           doc.thumbnail = encodeURI("file:///" + metaFilePath);
         }
         data.push(doc);
