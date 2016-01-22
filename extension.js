@@ -7,7 +7,7 @@ define(function(require, exports, module) {
 
   var extensionTitle = "ImageSwiper"; // should be equal to the name in the bower.json
   var extensionID = "perspectiveImageSwiper"; // ID should be equal to the directory name where the ext. is located   
-  var extensionIcon = "fa fa-th"; // icon class from font awesome
+  var extensionIcon = "fa fa-image"; // icon class from font awesome
 
   console.log("Loading " + extensionID);
 
