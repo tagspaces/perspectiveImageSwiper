@@ -60,7 +60,7 @@ define(function(require, exports, module) {
 
   function getPrevFile(filePath) {}
 
-  function updateIndexData(fsTreeData) {
+  function updateTreeData(fsTreeData) {
 
     console.log("Updating tree data not implemented");
   }
