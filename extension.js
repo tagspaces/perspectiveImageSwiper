@@ -1,6 +1,5 @@
-/* Copyright (c) 2015 The Tagspaces Authors. All rights reserved.
- * Use of this source code is governed by a AGPL3 license that
- * can be found in the LICENSE file. */
+/* Copyright (c) 2015-2016 The TagSpaces Authors.
+ * Use of this source code is governed by the MIT license which can be found in the LICENSE.txt file. */
 
 define(function(require, exports, module) {
   "use strict";
@@ -12,17 +11,15 @@ define(function(require, exports, module) {
   console.log("Loading " + extensionID);
 
   var TSCORE = require("tscore");
-
   var extensionDirectory = TSCORE.Config.getExtensionPath() + "/" + extensionID;
   var UI;
-
   var $viewContainer = $("#" + extensionID + "Container");
   var homeScreen;
   var template;
   var UI;
   var extensionLoaded;
 
-  var init = function() {
+  function init() {
     console.log("Initializing perspective " + extensionID);
 
     $viewContainer = $("#" + extensionID + "Container").empty();
@@ -42,37 +39,38 @@ define(function(require, exports, module) {
         }
       );
     });
-  };
+  }
 
-  var load = function() {
+  function load() {
     console.log("Loading perspective " + extensionID);
     $viewContainer.children().remove();
     extensionLoaded.then(function() {
       UI.load($viewContainer, template, TSCORE.fileList);
       TSCORE.hideLoadingAnimation();
     });
-  };
+  }
 
-  var clearSelectedFiles = function() {};
+  function clearSelectedFiles() {}
     
-  var removeFileUI = function(filePath) {};
+  function removeFileUI(filePath) {}
     
-  var updateFileUI = function(oldFilePath, newFilePath) {};
+  function updateFileUI(oldFilePath, newFilePath) {}
   
-  var getNextFile = function(filePath) {};
+  function getNextFile(filePath) {}
 
-  var getPrevFile = function(filePath) {};
+  function getPrevFile(filePath) {}
 
-  exports.updateTreeData = function updateIndexData(fsTreeData) {
+  function updateIndexData(fsTreeData) {
+
     console.log("Updating tree data not implemented");
-  };
+  }
 
-  // Vars
+  // API Vars
   exports.Title = extensionTitle;
   exports.ID = extensionID;
   exports.Icon = extensionIcon;
 
-  // Methods
+  // API Methods
   exports.init = init;
   exports.load = load;
   exports.clearSelectedFiles = clearSelectedFiles;
@@ -80,5 +78,6 @@ define(function(require, exports, module) {
   exports.getPrevFile = getPrevFile;
   exports.removeFileUI = removeFileUI;
   exports.updateFileUI = updateFileUI;
-  
+  exports.updateTreeData = updateTreeData;
+
 });

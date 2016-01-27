@@ -1,3 +1,6 @@
+/* Copyright (c) 2015-2016 The TagSpaces Authors.
+ * Use of this source code is governed by the MIT license which can be found in the LICENSE.txt file. */
+
 define(function(require, exports, module) {
   "use strict";
 
