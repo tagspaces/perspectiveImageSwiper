@@ -6,6 +6,52 @@ define(function(require, exports, module) {
   var supportedFileTypesThumbs = ['jpg' , 'jpeg' , 'png' , 'gif' , 'bmp' , 'svg'];
   var defaultThumnailPath;
 
+var isVisibleOnScreen = function(el) {
+    var rect = el.getBoundingClientRect();
+    
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+  
+  $('#viewContainers').on('scroll', _.debounce(function() {
+    $('#viewContainers').find("figure").each(function () {
+      
+      if (isVisibleOnScreen(this)) {
+        var path = $(this).find("a").attr("href");
+        
+        if (path.toLowerCase().indexOf('.png') > -1 || 
+          path.toLowerCase().indexOf('.jpg') > -1 ||
+          path.toLowerCase().indexOf('.jpeg') > -1) {
+          
+            //$(this).find('img').attr("src", path);
+          var $img = $(this).find('img');
+          var img = document.createElement('img');
+          img.src = encodeURI(path);
+
+          $(img).load(function () {
+           // Resample image onto canvas
+            var canvas = document.createElement('canvas')
+            var ctx = canvas.getContext("2d");
+
+            var aspectRatio = img.naturalWidth / img.naturalHeight
+            canvas.height = 240;
+            canvas.width = canvas.height * aspectRatio;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Use canvas content as tile background
+            //this.style.backgroundImage = "url('" + canvas.toDataURL("image/png") + "')"
+            $img.attr("src", canvas.toDataURL("image/png"));
+            img = undefined;
+          });
+        }
+      }
+    });
+  }, 500));
+
   function initUI(dir) {
     extDir = dir;
     defaultThumnailPath = extDir + "/default.png";
@@ -54,6 +100,8 @@ define(function(require, exports, module) {
     var html = compiledTemplate({data: data});
     container.append(html);
     initPhotoSwipeFromDOM('.my-gallery');
+
+    $('#viewContainers').trigger('scroll');
   }
 
   exports.initUI = initUI;
@@ -98,7 +146,7 @@ define(function(require, exports, module) {
 
         if (linkEl.children.length > 0) {
           // <img> thumbnail element, retrieving thumbnail url
-          item.msrc = linkEl.children[0].getAttribute('src');
+          item.src = linkEl.children[0].getAttribute('src');
         }
 
         item.el = figureEl; // save link to element for getThumbBoundsFn
