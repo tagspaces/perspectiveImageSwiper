@@ -1,29 +1,34 @@
-    {
-      "name": "perspectiveImageSwiper",
-      "id": "perspectiveImageSwiper",
-      "description": "A TagSpaces perspective extension allowing viewing of images in the current folder.",
-      "type": "perspective",
-      "version": "1.0.0",
-      "dependencies": {
-        "photoswipe": "4.1.0"
-      },
-      "devDependencies": {},
-      "authors": [
-        "TagSpaces Authors - http://tagspaces.org",
-        "Ilian Sapundshiev - http://ilian.me"
-      ],
-      "keywords": [
-        "images",
-        "jpg",
-        "photos",
-        "viewer"
-      ],
-      "license": "",
-      "main": [
-        "extension.js"
-      ],
-      "ignore": [
-        "Gruntfile.js"
-      ],
-      "private": true
-    }
+A TagSpaces extension able to display common images formats from the current folder.
+
+## Features
+
+* Displaying only the PNG, JPG, BMP, GIF files from the current folder
+* Build in key shortcuts for easy navigation thought the images
+* Fullscreen mode
+* Image zooming
+
+## Used libraries
+This extension thankfully relays on the following great libraries:
+
+* [photoswipe](http://photoswipe.com/)
+
+## Installation
+
+This extensions is packaged with any new version of TagSpaces
+
+## Source code
+
+The source code of this extension is freely available on [github.com/tagspaces/perspectiveImageSwiper](https://github.com/tagspaces/perspectiveImageSwiper/)
+
+## Development
+
+If you want to extend this extensions, please follow our general [extension development guide](http://tagspaces.org/documentation/extension-development-guide)
+
+## Screenshots
+
+![Screenshot of the ImageSwiper extension](http://tagspaces.org/extensions/editorHTML/perspectiveImageSwiper-screenshot.png)
+
+## License
+
+[MIT](https://github.com/tagspaces/perspectiveImageSwiper/blob/master/LICENSE.txt)
+

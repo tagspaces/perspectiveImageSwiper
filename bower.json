@@ -18,7 +18,7 @@
     "photos",
     "viewer"
   ],
-  "license": "",
+  "license": "MIT",
   "main": [
     "extension.js"
   ],
