@@ -26,7 +26,7 @@ If you want to extend this extensions, please follow our general [extension deve
 
 ## Screenshots
 
-![Screenshot of the ImageSwiper extension](http://tagspaces.org/extensions/editorHTML/perspectiveImageSwiper-screenshot.png)
+![Screenshot of the ImageSwiper extension](http://tagspaces.org/extensions/perspectiveImageSwiper/perspectiveImageSwiper-screenshot.png)
 
 ## License
 
