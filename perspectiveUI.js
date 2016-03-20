@@ -9,6 +9,22 @@ define(function(require, exports, module) {
   var supportedFileTypesThumbs = ['jpg' , 'jpeg' , 'png' , 'gif' , 'bmp' , 'svg'];
   var defaultThumnailPath;
 
+
+  // Handling thumbnails
+  $('#viewContainers').on('scroll', _.debounce(function() {
+    $('#viewContainers').find("figure").each(function() {
+      if (TSCORE.Utils.isVisibleOnScreen(this)) {
+        var $img = $(this).find('img');
+        if($img.attr("src").indexOf(defaultThumnailPath) === 0) {
+          var filePath = $(this).find("a").attr("href");
+          TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
+            $img.attr("src", url);
+          });
+        }
+      }
+    });
+  }, 500));
+
   function initUI(dir) {
     extDir = dir;
     defaultThumnailPath = extDir + "/default.png";
@@ -61,6 +77,8 @@ define(function(require, exports, module) {
     var html = compiledTemplate({data: data});
     container.append(html);
     initPhotoSwipeFromDOM('.my-gallery');
+
+    $('#viewContainers').trigger('scroll');
   }
 
   exports.initUI = initUI;
@@ -105,7 +123,7 @@ define(function(require, exports, module) {
 
         if (linkEl.children.length > 0) {
           // <img> thumbnail element, retrieving thumbnail url
-          item.msrc = linkEl.children[0].getAttribute('src');
+          //item.src = linkEl.children[0].getAttribute('src');
         }
 
         item.el = figureEl; // save link to element for getThumbBoundsFn
