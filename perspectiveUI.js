@@ -15,7 +15,7 @@ define(function(require, exports, module) {
     $('#viewContainers').find("figure").each(function() {
       if (TSCORE.Utils.isVisibleOnScreen(this)) {
         var $img = $(this).find('img');
-        if($img.attr("src").indexOf(defaultThumnailPath) === 0) {
+        if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
           var filePath = $(this).find("a").attr("href");
           TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
             $img.attr("src", url);
