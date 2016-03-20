@@ -11,11 +11,13 @@ define(function(require, exports, module) {
   $('#viewContainers').on('scroll', _.debounce(function() {
     $('#viewContainers').find("figure").each(function() {
       if (TSCORE.Utils.isVisibleOnScreen(this)) {
-        var filePath = $(this).find("a").attr("href");
         var $img = $(this).find('img');
-        TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
-          $img.attr("src", url);
-        });
+        if($img.attr("src").indexOf(defaultThumnailPath) === 0) {
+          var filePath = $(this).find("a").attr("href");
+          TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
+            $img.attr("src", url);
+          });
+        }
       }
     });
   }, 500));
