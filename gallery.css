@@ -11,14 +11,14 @@
 .my-gallery img {
   width: 100%;
   height: auto;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 250px;
+  max-height: 250px;
 }
 .my-gallery figure {
   display: block;
   float: left;
   margin: 0 5px 5px 0;
-  width: 150px;
+  width: 250px;
 
   flex: 1 1 auto;
   -webkit-flex: 1 1 auto;
