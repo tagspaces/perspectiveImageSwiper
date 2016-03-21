@@ -1,6 +1,7 @@
 .my-gallery {
   width: 100%;
   float: left;
+  background-color: black;
 
   display: flex;
   display: -webkit-flex;
@@ -16,8 +17,8 @@
 }
 .my-gallery figure {
   display: block;
-  float: left;
-  margin: 0 5px 5px 0;
+  text-align: center;
+  margin: 5px 0px 0px 5px;
   width: 250px;
 
   flex: 1 1 auto;
@@ -25,5 +26,5 @@
   -ms-flex: 1 1 auto;
 }
 .my-gallery figcaption {
-  display: none;
+  color: whitesmoke;
 }
