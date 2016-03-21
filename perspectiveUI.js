@@ -12,7 +12,7 @@ define(function(require, exports, module) {
 
   // Handling thumbnails
   $('#viewContainers').on('scroll', _.debounce(function() {
-    $('#viewContainers').find("figure").each(function() {
+    $('.my-gallery').find("figure").each(function() {
       if (TSCORE.Utils.isVisibleOnScreen(this)) {
         var $img = $(this).find('img');
         if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {

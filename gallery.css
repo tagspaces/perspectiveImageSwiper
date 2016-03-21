@@ -10,7 +10,7 @@
   flex-wrap: wrap;
 }
 .my-gallery img {
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 250px;
   max-height: 250px;

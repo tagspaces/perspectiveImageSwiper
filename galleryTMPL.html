@@ -1,16 +1,14 @@
-<div id="viewContainers">
-  <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-    {{#each data}}
-    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-      <a href="{{path}}" itemprop="contentUrl" title="{{name}}" >
-        <img src={{thumbnail}} itemprop="thumbnail">
-      </a>
-      <figcaption itemprop="caption description">{{name}}</figcaption>
-    </figure>
-    {{else}}
-    <p style="width: 100%; margin: 5px; font-size: 13px; text-align: center;">Directory does not contain any images or is currently being analysed.</p>
-    {{/each}}
-  </div>
+<div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+  {{#each data}}
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <a href="{{path}}" itemprop="contentUrl" title="{{name}}" >
+      <img src={{thumbnail}} itemprop="thumbnail">
+    </a>
+    <figcaption itemprop="caption description">{{name}}</figcaption>
+  </figure>
+  {{else}}
+  <p style="width: 100%; margin: 5px; font-size: 13px; text-align: center;">Directory does not contain any images or is currently being analysed.</p>
+  {{/each}}
 </div>
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
     <!-- Background of PhotoSwipe.
