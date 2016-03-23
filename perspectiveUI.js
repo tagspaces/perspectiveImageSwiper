@@ -41,9 +41,12 @@ define(function(require, exports, module) {
     return res;
   }
 
-  function load(container, template, files) {
+  function load(container, template) {
     var data = [];
     var compiledTemplate = Handlebars.compile(template);
+
+    var files = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
+
     files.forEach(function(fileInfo) {
       var ext = fileInfo[TSCORE.fileListFILEEXT];
 
