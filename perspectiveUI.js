@@ -48,10 +48,10 @@ define(function(require, exports, module) {
     var files = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
 
     files.forEach(function(fileInfo) {
-      var ext = fileInfo[TSCORE.fileListFILEEXT];
+      var ext = fileInfo.extension;
 
       if (supportedFileTypesThumbs.indexOf(ext) !== -1) {
-        var filePath = fileInfo[TSCORE.fileListFILEPATH];
+        var filePath = fileInfo.path;
         var encodedPath;
         if (isChrome) {
           encodedPath = encodeURI("file://" + filePath);
@@ -59,10 +59,10 @@ define(function(require, exports, module) {
           encodedPath = encodeURI(filePath);
         }
         var doc = {
-          name: fileInfo[TSCORE.fileListFILENAME],
+          name: fileInfo.name,
           path: encodedPath,
           thumbnail:  encodeURI(defaultThumnailPath),
-          title: fileInfo[TSCORE.fileListTITLE]
+          title: fileInfo.title
         };
 
         var metaFilePath = TSCORE.Meta.findMetaFilebyPath(filePath, TSCORE.thumbFileExt);
