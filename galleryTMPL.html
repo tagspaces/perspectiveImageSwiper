@@ -1,7 +1,7 @@
 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   {{#each data}}
   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <a href="{{path}}" itemprop="contentUrl" title="{{name}}" >
+    <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
       <img src={{thumbnail}} itemprop="thumbnail">
     </a>
     <figcaption itemprop="caption description">{{name}}</figcaption>
