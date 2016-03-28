@@ -27,10 +27,10 @@ define(function(require, exports, module) {
     extensionLoaded = new Promise(function(resolve, reject) {
       require([
         extensionDirectory + "/perspectiveUI.js",
-        "text!" + extensionDirectory + "/galleryTMPL.html",
-        "css!" + extensionDirectory + "/gallery.css",
+        "text!" + extensionDirectory + "/extension.html",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
-        "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css"
+        "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
+        "css!" + extensionDirectory + "/extension.css",
         ], function(perspectiveUI, tmpl) {
           UI = perspectiveUI;
           template = tmpl;
@@ -43,7 +43,6 @@ define(function(require, exports, module) {
 
   function load() {
     console.log("Loading perspective " + extensionID);
-    $viewContainer.children().remove();
     extensionLoaded.then(function() {
       UI.load($viewContainer, template);
       TSCORE.hideLoadingAnimation();

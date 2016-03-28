@@ -9,43 +9,65 @@ define(function(require, exports, module) {
   var supportedFileTypesThumbs = ['jpg' , 'jpeg' , 'png' , 'gif' , 'bmp' , 'svg'];
   var defaultThumnailPath;
 
-
-  // Handling thumbnails
-  $('#viewContainers').on('scroll', _.debounce(function() {
-    $('.my-gallery').find("figure").each(function() {
-      if (TSCORE.Utils.isVisibleOnScreen(this)) {
-        var $img = $(this).find('img');
-        if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
-          var filePath = $(this).find("a").attr("href");
-          TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
-            $img.attr("src", url);
-          });
-        }
-      }
-    });
-  }, 500));
+  var galContainer;
+  var galTemplate;
 
   function initUI(dir) {
     extDir = dir;
     defaultThumnailPath = extDir + "/default.png";
-  }
 
-  function loadThumbnail(fileName) {
-    var name = TSCORE.Utils.baseName(fileName);
-    var res = null;
-    TSCORE.metaFileList.forEach(function(element) {
-      if (element.name.indexOf(name) >= 0) {
-        res = element.path;
-      }
-    });
-    return res;
+    // Handling thumbnails
+    $('#viewContainers').on('scroll', _.debounce(function() {
+      $('.my-gallery').find("figure").each(function() {
+        if (TSCORE.Utils.isVisibleOnScreen(this)) {
+          var $img = $(this).find('img');
+          if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
+            var filePath = $(this).find("a").attr("href");
+            TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
+              $img.attr("src", url);
+            });
+          }
+        }
+      });
+    }, 500));
+
   }
 
   function load(container, template) {
+    galContainer = container;
+    galTemplate = template;
+
     var data = [];
+    var files = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
+    var allResults;
+    var partialResult;
+
+    container.children().remove();
+
     var compiledTemplate = Handlebars.compile(template);
 
-    var files = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
+    /*
+    // Initial load more results implementation
+    if (partialResult && partialResult.length > 0) {
+      files = allResults;
+      partialResult = [];
+      $("#imageSwiperShowAllFileContainer").hide();
+    } else {
+      allResults = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
+      if (allResults.length >= TSCORE.maxSearchResults) {
+        partialResult = allResults.slice(0, TSCORE.maxSearchResults);
+        $("#imageSwiperShowAllFileContainer").show();
+        files = partialResult;
+      } else {
+        files = allResults;
+        $("#imageSwiperShowAllFileContainer").hide();
+      }
+    }
+
+    $('#imageSwiperShowAllFilesButton').on("click", function() {
+      load(galContainer, galTemplate);
+    })*/
+
 
     files.forEach(function(fileInfo) {
       var ext = fileInfo.extension;
@@ -84,10 +106,18 @@ define(function(require, exports, module) {
     $('#viewContainers').trigger('scroll');
   }
 
-  exports.initUI = initUI;
-  exports.load = load;
+  function loadThumbnail(fileName) {
+    var name = TSCORE.Utils.baseName(fileName);
+    var res = null;
+    TSCORE.metaFileList.forEach(function(element) {
+      if (element.name.indexOf(name) >= 0) {
+        res = element.path;
+      }
+    });
+    return res;
+  }
 
-  var initPhotoSwipeFromDOM = function(gallerySelector) {
+  function initPhotoSwipeFromDOM(gallerySelector) {
 
     // parse slide data (url, title, size ...) from DOM elements
     // (children of gallerySelector)
@@ -242,4 +272,8 @@ define(function(require, exports, module) {
       galleryElements[i].onclick = onThumbnailsClick;
     }
   };
+
+  exports.initUI = initUI;
+  exports.load = load;
+
 });

@@ -1,3 +1,11 @@
+#imageSwiperShowAllFileContainer {
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: black;
+}
+
 .my-gallery {
   width: 100%;
   float: left;
