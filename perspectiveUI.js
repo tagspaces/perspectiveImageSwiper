@@ -11,6 +11,8 @@ define(function(require, exports, module) {
 
   var galContainer;
   var galTemplate;
+  var partialResult;
+  var allResults;
 
   function initUI(dir) {
     extDir = dir;
@@ -33,41 +35,34 @@ define(function(require, exports, module) {
 
   }
 
-  function load(container, template) {
+  function load(container, template, showAllResult) {
     galContainer = container;
     galTemplate = template;
 
     var data = [];
-    var files = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
-    var allResults;
-    var partialResult;
+    var files; //= TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
+    var shouldShowAllFilesContainer;
 
     container.children().remove();
 
     var compiledTemplate = Handlebars.compile(template);
 
-    /*
     // Initial load more results implementation
-    if (partialResult && partialResult.length > 0) {
+    if (showAllResult && partialResult && partialResult.length > 0) {
       files = allResults;
       partialResult = [];
-      $("#imageSwiperShowAllFileContainer").hide();
+      shouldShowAllFilesContainer = false;
     } else {
       allResults = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
       if (allResults.length >= TSCORE.maxSearchResults) {
         partialResult = allResults.slice(0, TSCORE.maxSearchResults);
-        $("#imageSwiperShowAllFileContainer").show();
+        shouldShowAllFilesContainer = true;
         files = partialResult;
       } else {
         files = allResults;
-        $("#imageSwiperShowAllFileContainer").hide();
+        shouldShowAllFilesContainer = false;
       }
     }
-
-    $('#imageSwiperShowAllFilesButton').on("click", function() {
-      load(galContainer, galTemplate);
-    })*/
-
 
     files.forEach(function(fileInfo) {
       var ext = fileInfo.extension;
@@ -102,6 +97,13 @@ define(function(require, exports, module) {
     var html = compiledTemplate({data: data});
     container.append(html);
     initPhotoSwipeFromDOM('.my-gallery');
+
+    $('#imageSwiperShowAllFilesButton').on("click", function() {
+      load(galContainer, galTemplate, true);
+    })
+
+    shouldShowAllFilesContainer?$("#imageSwiperShowAllFileContainer").show():$("#imageSwiperShowAllFileContainer").hide();
+
 
     $('#viewContainers').trigger('scroll');
   }
