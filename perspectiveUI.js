@@ -100,9 +100,9 @@ define(function(require, exports, module) {
 
     $('#imageSwiperShowAllFilesButton').on("click", function() {
       load(galContainer, galTemplate, true);
-    })
+    });
 
-    shouldShowAllFilesContainer?$("#imageSwiperShowAllFileContainer").show():$("#imageSwiperShowAllFileContainer").hide();
+    shouldShowAllFilesContainer ? $("#imageSwiperShowAllFileContainer").show() : $("#imageSwiperShowAllFileContainer").hide();
 
 
     $('#viewContainers').trigger('scroll');
@@ -273,7 +273,7 @@ define(function(require, exports, module) {
       galleryElements[i].setAttribute('data-pswp-uid', i + 1);
       galleryElements[i].onclick = onThumbnailsClick;
     }
-  };
+  }
 
   exports.initUI = initUI;
   exports.load = load;
