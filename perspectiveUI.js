@@ -54,8 +54,8 @@ define(function(require, exports, module) {
       shouldShowAllFilesContainer = false;
     } else {
       allResults = TSCORE.Search.searchData(TSCORE.fileList, TSCORE.Search.nextQuery);
-      if (allResults.length >= TSCORE.maxSearchResults) {
-        partialResult = allResults.slice(0, TSCORE.maxSearchResults);
+      if (allResults.length >= TSCORE.Config.getMaxSearchResultCount()) {
+        partialResult = allResults.slice(0, TSCORE.Config.getMaxSearchResultCount());
         shouldShowAllFilesContainer = true;
         files = partialResult;
       } else {
