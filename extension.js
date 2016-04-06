@@ -25,16 +25,21 @@ define(function(require, exports, module) {
     $viewContainer = $("#" + extensionID + "Container").empty();
 
     extensionLoaded = new Promise(function(resolve, reject) {
+      console.warn("extensionLoaded--> " + extensionID);
       require([
         extensionDirectory + "/perspectiveUI.js",
         "text!" + extensionDirectory + "/extension.html",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
         "css!" + extensionDirectory + "/extension.css",
+        "css!" + extensionDirectory + '/css/markdown.css',        
         ], function(perspectiveUI, tmpl) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
+          
+          $('#' + extensionID + 'Container [data-i18n]').i18n();
+          
           resolve(true);
         }
       );
@@ -46,6 +51,37 @@ define(function(require, exports, module) {
     extensionLoaded.then(function() {
       UI.load($viewContainer, template);
       TSCORE.hideLoadingAnimation();
+      try {
+        
+        var myMarkedFunk;
+        require(["marked"], function(marked) {
+          myMarkedFunk = marked;
+        });          
+        
+        $('#aboutExtensionModalImageSwiper').on('show.bs.modal', function() {
+          console.log("#aboutExtensionModalImageSwiper");
+          $.ajax({
+            url: extensionDirectory + '/README.md',
+            type: 'GET'
+          })
+          .done(function(mdData) {
+            //console.log("DATA: " + mdData);
+            if (typeof(myMarkedFunk) != 'undefined') {
+              $("#aboutExtensionModalImageSwiper .modal-body").html(myMarkedFunk(mdData));
+            } else {
+              $("#aboutExtensionModalImageSwiper .modal-body").html(mdData);
+              console.warn("marked function not found");
+            }  
+          })
+          .fail(function(data) {
+            console.warn("Loading file failed " + data);
+          });
+        }); 
+        
+      } catch (err) {
+        console.log("Failed translating extension");
+      }           
+      
     });
   }
 

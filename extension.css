@@ -36,3 +36,24 @@
 .my-gallery figcaption {
   color: whitesmoke;
 }
+
+#aboutExtensionModalImageSwiper img {
+  max-width: 100%;
+}
+
+#aboutExtensionModalImageSwiper h1 {
+  font-size: 22px;
+}
+
+#aboutExtensionModalImageSwiper h2 {
+  font-size: 20px;
+}
+
+#aboutExtensionModalImageSwiper h3 {
+  font-size: 18px;
+}
+
+#aboutExtensionModalImageSwiper .modal-body {
+  max-height: 500px;
+  overflow: auto;
+}
