@@ -59,10 +59,9 @@ define(function(require, exports, module) {
             })
             .done(function(mdData) {
               //console.log("DATA: " + mdData);
-              if (typeof(marked) != 'undefined') {
+              if (marked) {
                 $("#aboutExtensionModalImageSwiper .modal-body").html(marked(mdData));
-              } else {
-                $("#aboutExtensionModalImageSwiper .modal-body").html(mdData);
+              } else {                
                 console.warn("marked function not found");                  
               }   
             })
