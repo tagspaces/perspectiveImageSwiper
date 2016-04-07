@@ -60,9 +60,9 @@ define(function(require, exports, module) {
             .done(function(mdData) {
               //console.log("DATA: " + mdData);
               if (marked) {
-                $("#aboutExtensionModalImageSwiper .modal-body").html(marked(mdData));
+                $("#aboutExtensionModalImageSwiper .modal-body").html(marked(mdData, { sanitize: true }));
               } else {                
-                console.warn("marked function not found");                  
+                console.warn("markdown to html transformer not found");                  
               }   
             })
             .fail(function(data) {
