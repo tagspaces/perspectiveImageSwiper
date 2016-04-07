@@ -60,10 +60,12 @@ define(function(require, exports, module) {
             .done(function(mdData) {
               //console.log("DATA: " + mdData);
               if (marked) {
-                $("#aboutExtensionModalImageSwiper .modal-body").html(marked(mdData, { sanitize: true }));
-              } else {                
-                console.warn("markdown to html transformer not found");                  
-              }   
+                var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
+                modalBody.html(marked(mdData, { sanitize: true }));
+                handleLinks(modalBody);
+              } else {
+                console.log("markdown to html transformer not found");
+              }                  
             })
             .fail(function(data) {
               console.warn("Loading file failed " + data);
@@ -76,6 +78,17 @@ define(function(require, exports, module) {
       
     });
   }
+  
+  function handleLinks($element) {
+    $element.find("a[href]").each(function() {
+      var currentSrc = $(this).attr("href");
+      $(this).bind('click', function(e) {
+        e.preventDefault();
+        var msg = {command: "openLinkExternally", link : currentSrc};
+        window.parent.postMessage(JSON.stringify(msg), "*");
+      });
+    });
+  }  
 
   function clearSelectedFiles() {}
     
