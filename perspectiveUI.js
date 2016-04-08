@@ -25,6 +25,12 @@ define(function(require, exports, module) {
           var $img = $(this).find('img');
           if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
             var filePath = $(this).find("a").attr("href");
+            if (isChrome) {
+              var indexOfFile = filePath.indexOf("file://");
+              if (indexOfFile === 0) {
+                filePath = filePath.substring(7, filePath.length);
+              }
+            }
             TSCORE.Meta.loadThumbnailPromise(filePath).then(function(url) {
               $img.attr("src", url);
             });
