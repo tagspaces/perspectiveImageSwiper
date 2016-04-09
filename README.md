@@ -22,11 +22,11 @@ The source code of this extension is freely available on [github.com/tagspaces/p
 
 ## Development
 
-If you want to extend this extensions, please follow our general [extension development guide](http://tagspaces.org/documentation/extension-development-guide)
+If you want to extend this extensions, please follow our general [extension development guide](https://www.tagspaces.org/documentation/extension-development-guide)
 
 ## Screenshots
 
-![Screenshot of the ImageSwiper extension](http://tagspaces.org/extensions/perspectiveImageSwiper/perspectiveImageSwiper-screenshot.png)
+![Screenshot of the ImageSwiper extension](https://www.tagspaces.org/extensions/perspectiveImageSwiper/perspectiveImageSwiper-screenshot.png)
 
 ## License
 
