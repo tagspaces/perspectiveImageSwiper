@@ -100,6 +100,11 @@ define(function(require, exports, module) {
       }
     });
 
+    //Update statusbar,
+    if (data) {
+      $("#statusBar").text(data.length + " " + $.i18n.t("ns.perspectiveList:filesFound"));
+    }
+
     var html = compiledTemplate({data: data});
     container.append(html);
     initPhotoSwipeFromDOM('.my-gallery');
@@ -109,7 +114,6 @@ define(function(require, exports, module) {
     });
 
     shouldShowAllFilesContainer ? $("#imageSwiperShowAllFileContainer").show() : $("#imageSwiperShowAllFileContainer").hide();
-
 
     $('#viewContainers').trigger('scroll');
   }
