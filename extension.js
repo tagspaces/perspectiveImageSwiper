@@ -11,12 +11,14 @@ define(function(require, exports, module) {
   console.log("Loading " + extensionID);
 
   var TSCORE = require("tscore");
+  var marked = require('marked');
   var extensionDirectory = TSCORE.Config.getExtensionPath() + "/" + extensionID;
   var UI;
   var $viewContainer = $("#" + extensionID + "Container");
   var homeScreen;
   var template;
   var UI;
+  var aboutContent;
   var extensionLoaded;
 
   function init() {
@@ -28,17 +30,14 @@ define(function(require, exports, module) {
       require([
         extensionDirectory + "/perspectiveUI.js",
         "text!" + extensionDirectory + "/extension.html",
-        "marked",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
         "css!" + extensionDirectory + "/extension.css",              
-        ], function(perspectiveUI, tmpl, marked) {
+        ], function(perspectiveUI, tmpl) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
-          
           $('#' + extensionID + 'Container [data-i18n]').i18n();
-          
           resolve(true);
         }
       );
@@ -50,32 +49,24 @@ define(function(require, exports, module) {
     extensionLoaded.then(function() {
       UI.load($viewContainer, template);
       TSCORE.hideLoadingAnimation();
-      try {
-        require(["marked"], function(marked) {  
-          $('#aboutExtensionModalImageSwiper').on('show.bs.modal', function() {
-            $.ajax({
-              url: extensionDirectory + '/README.md',
-              type: 'GET'
-            })
-            .done(function(mdData) {
-              //console.log("DATA: " + mdData);
-              if (marked) {
-                var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
-                modalBody.html(marked(mdData, { sanitize: true }));
-                handleLinks(modalBody);
-              } else {
-                console.log("markdown to html transformer not found");
-              }                  
-            })
-            .fail(function(data) {
-              console.warn("Loading file failed " + data);
-            });
-          }); 
-        });          
-      } catch (err) {
-        console.log("Failed translating extension");
-      }           
-      
+
+      if (!aboutContent) {
+        $.ajax({
+          url: extensionDirectory + '/README.md',
+          type: 'GET'
+        })
+        .done(function(mdData) {
+          if (marked) {
+            aboutContent = marked(mdData, { sanitize: true });
+            var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
+            modalBody.html(aboutContent);
+            handleLinks(modalBody);
+          }
+        })
+        .fail(function(data) {
+          console.log("Loading about content failed " + data);
+        });
+      }
     });
   }
   
