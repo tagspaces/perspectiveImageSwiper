@@ -2,20 +2,13 @@
   {{#each data}}
   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
     <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
-      <img src={{thumbnail}} itemprop="thumbnail">
+        <img src={{thumbnail}} itemprop="thumbnail">
     </a>
-      <div title="{{filepath}}" filepath="{{filepath}}" class="fileTile" style="background-image: url(\'{{thumbPath}}\')">
-      <button class="btn btn-link fileTileSelector {{coloredExtClass}}" data-ext="{{fileext}}" filepath="{{filepath}}">
-          <i class="fa {{selected}} fa-lg"></i><span class="fileExtTile">{{fileext}}</span></button>
-      <div class="tagsInFileTile">
-          {{#each tags}}
-          <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}" style="{{style}}">{{tag}}
-              </button>
-          {{/each}}
-          </div>
-      <div class="titleInFileTile">{{title}}</div>
-      </div>
+
     <figcaption itemprop="caption description">{{name}}</figcaption>
+      {{#each tags}}
+      <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
+      {{/each}}
   </figure>
   {{else}}
   <p style="width: 100%; margin: 5px; font-size: 13px; text-align: center;">Directory does not contain any images or is currently being analysed.</p>
@@ -78,7 +71,7 @@
     <li class="divider"></li>
     <li><a id="aboutButton" data-toggle="modal" data-target="#aboutExtensionModalImageSwiper">
       <i class="fa fa-comment fa-lg fa-fw"></i>&nbsp;<span data-i18n="ns.perspectiveList:about">About</span>
-    </a></li>     
+    </a></li>
   </ul>
 </div>
 <div class="modal fullScreenMobile" id="aboutExtensionModalImageSwiper" tabindex="-1" role="dialog" aria-hidden="true">

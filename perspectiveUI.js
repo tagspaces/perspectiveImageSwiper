@@ -1,12 +1,14 @@
 /* Copyright (c) 2015-2016 The TagSpaces Authors.
  * Use of this source code is governed by the MIT license which can be found in the LICENSE.txt file. */
 
+/* global define, Handlebars, isWin, _  */
+
 define(function(require, exports, module) {
   "use strict";
 
   var TSCORE = require("tscore");
   var extDir;
-  var supportedFileTypesThumbs = ['jpg' , 'jpeg' , 'png' , 'gif' , 'bmp' , 'svg'];
+  var supportedFileTypesThumbs = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
   var defaultThumnailPath;
 
   var galContainer;
@@ -84,9 +86,12 @@ define(function(require, exports, module) {
         var doc = {
           name: fileInfo.name,
           path: encodedPath,
-          thumbnail:  encodeURI(defaultThumnailPath),
-          title: fileInfo.title
+          thumbnail: encodeURI(defaultThumnailPath),
+          title: fileInfo.title,
+          tags: fileInfo.tags
         };
+
+        console.debug(doc.tags);
 
         var metaFilePath = TSCORE.Meta.findMetaFilebyPath(filePath, TSCORE.thumbFileExt);
         if (metaFilePath) {
@@ -131,12 +136,12 @@ define(function(require, exports, module) {
     // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
       var thumbElements = el.childNodes,
-          numNodes = thumbElements.length,
-          items = [],
-          figureEl,
-          linkEl,
-          size,
-          item;
+              numNodes = thumbElements.length,
+              items = [],
+              figureEl,
+              linkEl,
+              size,
+              item;
 
       for (var i = 0; i < numNodes; i++) {
         figureEl = thumbElements[i]; // <figure> element
@@ -198,10 +203,10 @@ define(function(require, exports, module) {
       // find index of clicked item by looping through all child nodes
       // alternatively, you may define index via data- attribute
       var clickedGallery = clickedListItem.parentNode,
-          childNodes = clickedListItem.parentNode.childNodes,
-          numChildNodes = childNodes.length,
-          nodeIndex = 0,
-          index;
+              childNodes = clickedListItem.parentNode.childNodes,
+              numChildNodes = childNodes.length,
+              nodeIndex = 0,
+              index;
 
       for (var i = 0; i < numChildNodes; i++) {
         if (childNodes[i].nodeType !== 1) {
@@ -224,7 +229,7 @@ define(function(require, exports, module) {
 
     var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
       var pswpElement = document.querySelectorAll('.pswp')[0],
-          gallery, options;
+              gallery, options;
 
       var items = parseThumbnailElements(galleryElement);
 
@@ -235,10 +240,10 @@ define(function(require, exports, module) {
         getThumbBoundsFn: function(index) {
           // See Options -> getThumbBoundsFn section of documentation for more info
           var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-            rect = thumbnail.getBoundingClientRect();
+                  pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                  rect = thumbnail.getBoundingClientRect();
 
-          return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
         },
         shareEl: false
       };
@@ -256,8 +261,8 @@ define(function(require, exports, module) {
       }
 
       require([
-          extDir + "/libs/photoswipe/dist/photoswipe.min.js",
-          extDir + "/libs/photoswipe/dist/photoswipe-ui-default.min.js",
+        extDir + "/libs/photoswipe/dist/photoswipe.min.js",
+        extDir + "/libs/photoswipe/dist/photoswipe-ui-default.min.js",
       ], function(PhotoSwipe, PhotoSwipeUI_Default) {
         gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
         gallery.init();
