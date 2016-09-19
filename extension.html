@@ -4,11 +4,14 @@
     <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
         <img src={{thumbnail}} itemprop="thumbnail">
     </a>
-
-    <figcaption itemprop="caption description">{{name}}</figcaption>
-      {{#each tags}}
-      <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
-      {{/each}}
+    <figcaption itemprop="caption description">
+        <label>{{name}}</label>
+        <div class="row" style="margin: 15px">
+            {{#each tags}}
+            <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
+            {{/each}}
+        </div>
+    </figcaption>
   </figure>
   {{else}}
   <p style="width: 100%; margin: 5px; font-size: 13px; text-align: center;">Directory does not contain any images or is currently being analysed.</p>
