@@ -91,8 +91,6 @@ define(function(require, exports, module) {
           tags: fileInfo.tags
         };
 
-        console.debug(doc.tags);
-
         var metaFilePath = TSCORE.Meta.findMetaFilebyPath(filePath, TSCORE.thumbFileExt);
         if (metaFilePath) {
           if (isChrome) {
@@ -136,12 +134,12 @@ define(function(require, exports, module) {
     // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
       var thumbElements = el.childNodes,
-              numNodes = thumbElements.length,
-              items = [],
-              figureEl,
-              linkEl,
-              size,
-              item;
+        numNodes = thumbElements.length,
+        items = [],
+        figureEl,
+        linkEl,
+        size,
+        item;
 
       for (var i = 0; i < numNodes; i++) {
         figureEl = thumbElements[i]; // <figure> element
@@ -203,10 +201,10 @@ define(function(require, exports, module) {
       // find index of clicked item by looping through all child nodes
       // alternatively, you may define index via data- attribute
       var clickedGallery = clickedListItem.parentNode,
-              childNodes = clickedListItem.parentNode.childNodes,
-              numChildNodes = childNodes.length,
-              nodeIndex = 0,
-              index;
+        childNodes = clickedListItem.parentNode.childNodes,
+        numChildNodes = childNodes.length,
+        nodeIndex = 0,
+        index;
 
       for (var i = 0; i < numChildNodes; i++) {
         if (childNodes[i].nodeType !== 1) {
@@ -229,7 +227,7 @@ define(function(require, exports, module) {
 
     var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
       var pswpElement = document.querySelectorAll('.pswp')[0],
-              gallery, options;
+        gallery, options;
 
       var items = parseThumbnailElements(galleryElement);
 
@@ -240,8 +238,8 @@ define(function(require, exports, module) {
         getThumbBoundsFn: function(index) {
           // See Options -> getThumbBoundsFn section of documentation for more info
           var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-                  pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                  rect = thumbnail.getBoundingClientRect();
+            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+            rect = thumbnail.getBoundingClientRect();
 
           return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
         },
