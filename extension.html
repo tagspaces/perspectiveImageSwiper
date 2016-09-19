@@ -4,6 +4,17 @@
     <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
       <img src={{thumbnail}} itemprop="thumbnail">
     </a>
+      <div title="{{filepath}}" filepath="{{filepath}}" class="fileTile" style="background-image: url(\'{{thumbPath}}\')">
+      <button class="btn btn-link fileTileSelector {{coloredExtClass}}" data-ext="{{fileext}}" filepath="{{filepath}}">
+          <i class="fa {{selected}} fa-lg"></i><span class="fileExtTile">{{fileext}}</span></button>
+      <div class="tagsInFileTile">
+          {{#each tags}}
+          <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}" style="{{style}}">{{tag}}
+              </button>
+          {{/each}}
+          </div>
+      <div class="titleInFileTile">{{title}}</div>
+      </div>
     <figcaption itemprop="caption description">{{name}}</figcaption>
   </figure>
   {{else}}
