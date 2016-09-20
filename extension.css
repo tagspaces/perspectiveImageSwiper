@@ -26,7 +26,7 @@
 .my-gallery figure {
   display: block;
   text-align: center;
-  margin: 5px 0px 0px 5px;
+  margin: 5px 0 0 5px;
   width: 250px;
 
   flex: 1 1 auto;
@@ -56,4 +56,16 @@
 #aboutExtensionModalImageSwiper .modal-body {
   max-height: 500px;
   overflow: auto;
+}
+
+.tagButton-xs {
+  font-size: 11px;
+  padding: 0 2px 0 2px !important;
+}
+
+.gallery-tags {
+  margin-top: 1px;
+  margin-bottom: 5px;
+  margin-right: -1px;
+  margin-left: -1px;
 }

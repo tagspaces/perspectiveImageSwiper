@@ -5,10 +5,10 @@
         <img src={{thumbnail}} itemprop="thumbnail">
     </a>
     <figcaption itemprop="caption description">
-        <label>{{name}}</label>
-        <div class="row" style="margin: 15px">
+        <label>{{title}}</label>
+        <div class="row gallery-tags">
             {{#each tags}}
-            <button class="btn btn-sm tagButton fileTagsTile" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
+            <button class="btn btn-sm tagButton fileTagsTile tagButton-xs" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
             {{/each}}
         </div>
     </figcaption>
