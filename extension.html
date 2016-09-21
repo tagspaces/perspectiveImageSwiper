@@ -1,14 +1,14 @@
 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   {{#each data}}
   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
-        <img src={{thumbnail}} itemprop="thumbnail">
+    <a id="imagePath" href="{{path}}" itemprop="contentUrl" title="{{path}}" >
+        <img id="imageSrc" src={{thumbnail}} itemprop="thumbnail">
     </a>
     <figcaption itemprop="caption description">
         <label>{{title}}</label>
         <div class="row gallery-tags">
             {{#each tags}}
-            <button class="btn btn-sm tagButton fileTagsTile tagButton-xs" tag="{{tag}}" filepath="{{filepath}}">{{this}}</button>
+            <button class="btn btn-sm tagButton fileTagsTile tagButton-xs" tag="{{this}}" filepath="{{filepath}}">{{this}}</button>
             {{/each}}
         </div>
     </figcaption>

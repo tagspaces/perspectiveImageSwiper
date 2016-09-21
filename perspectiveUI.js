@@ -27,6 +27,7 @@ define(function(require, exports, module) {
           var $img = $(this).find('img');
           if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
             var filePath = $(this).find("a").attr("href");
+            console.log(filePath);
             if (isChrome) {
               var indexOfFile = filePath.indexOf("file://");
               if (indexOfFile === 0) {
@@ -77,6 +78,7 @@ define(function(require, exports, module) {
 
       if (supportedFileTypesThumbs.indexOf(ext) !== -1) {
         var filePath = fileInfo.path;
+        console.log(filePath);
         var encodedPath;
         if (isChrome) {
           encodedPath = encodeURI("file://" + filePath);
@@ -206,6 +208,12 @@ define(function(require, exports, module) {
         nodeIndex = 0,
         index;
 
+      console.debug(clickedGallery);
+      console.debug(clickedListItem);
+      var elementPath = $(clickedListItem).find("a").attr("href");
+      TSCORE.selectedFiles[0] = decodeURI(elementPath);
+      console.debug(TSCORE.selectedFiles[0]);
+
       for (var i = 0; i < numChildNodes; i++) {
         if (childNodes[i].nodeType !== 1) {
           continue;
@@ -264,6 +272,9 @@ define(function(require, exports, module) {
       ], function(PhotoSwipe, PhotoSwipeUI_Default) {
         gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
         gallery.init();
+        gallery.listen('gettingData', function(index, item) {
+          console.log("Image loaded " + decodeURI(item.src));
+        });
         gallery.listen('imageLoadComplete', function(index, item) {
           var img = new Image();
           img.src = item.src;

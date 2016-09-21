@@ -69,3 +69,7 @@
   margin-right: -1px;
   margin-left: -1px;
 }
+
+#dialogAddTags {
+  z-index: 9000;
+}
