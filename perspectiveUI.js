@@ -208,12 +208,6 @@ define(function(require, exports, module) {
         nodeIndex = 0,
         index;
 
-      console.debug(clickedGallery);
-      console.debug(clickedListItem);
-      var elementPath = $(clickedListItem).find("a").attr("href");
-      TSCORE.selectedFiles[0] = decodeURI(elementPath);
-      console.debug(TSCORE.selectedFiles[0]);
-
       for (var i = 0; i < numChildNodes; i++) {
         if (childNodes[i].nodeType !== 1) {
           continue;
@@ -272,9 +266,6 @@ define(function(require, exports, module) {
       ], function(PhotoSwipe, PhotoSwipeUI_Default) {
         gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
         gallery.init();
-        gallery.listen('gettingData', function(index, item) {
-          console.log("Image loaded " + decodeURI(item.src));
-        });
         gallery.listen('imageLoadComplete', function(index, item) {
           var img = new Image();
           img.src = item.src;
@@ -282,6 +273,12 @@ define(function(require, exports, module) {
           item.h = img.height;
           gallery.updateSize(true);
           img = undefined;
+        });
+
+        gallery.listen('gettingData', function(index, item) {
+          console.log("Current image" + decodeURI(gallery.currItem.src));
+          TSCORE.selectedFiles[0] = decodeURI(gallery.currItem.src);
+          console.debug(TSCORE.selectedFiles[0]);
         });
       });
     };
