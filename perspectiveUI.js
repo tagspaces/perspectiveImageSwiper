@@ -40,6 +40,10 @@ define(function(require, exports, module) {
           }
         }
       });
+
+     $("#imageSwipperTagButton").on('click', function(){
+       TSCORE.showAddTagsDialog();
+     });
     }, 500));
 
   }
@@ -292,41 +296,21 @@ define(function(require, exports, module) {
     }
   }
 
-  initUI.prototype.updateFileUI = function(oldFilePath, newFilePath) {
+  function updateFileUI(oldFilePath, newFilePath) {
     console.log("Updating UI for oldfile " + oldFilePath + " newfile " + newFilePath);
 
-    // Updating the file selection
-    if (oldFilePath !== newFilePath) {
-      TSCORE.selectedFiles.splice(TSCORE.selectedFiles.indexOf(oldFilePath), 1);
-      TSCORE.selectedFiles.push(newFilePath);
-    }
+    //// Updating the file selection
+    //if (oldFilePath !== newFilePath) {
+    //  TSCORE.selectedFiles.splice(TSCORE.selectedFiles.indexOf(oldFilePath), 1);
+    //  TSCORE.selectedFiles.push(newFilePath);
+    //}
+    var dirPath = TSCORE.currentPath;
+    TSCORE.IO.listDirectoryPromise(dirPath).then(function(entries) {
 
-    var title = TSCORE.TagUtils.extractTitle(newFilePath),
-      fileExt = TSCORE.TagUtils.extractFileExtension(newFilePath),
-      fileTags = TSCORE.TagUtils.extractTags(newFilePath);
-
-    var $fileRow;
-
-    if (isWin && !isWeb) {
-      oldFilePath = oldFilePath.replace("\\", "");
-      $("#" + this.extensionID + "Container button[filepath]").each(function() {
-        if ($(this).attr("filepath").replace("\\", "") === oldFilePath) {
-          $fileRow = $(this).parent().parent();
-        }
-      });
-    } else {
-      $fileRow = $("#" + this.extensionID + "Container button[filepath='" + oldFilePath + "']").parent().parent();
-    }
-
-    $($fileRow.find("td")[0]).empty().append(this.buttonizeTitle(title, newFilePath, fileExt, false, true));
-    $($fileRow.find("td")[1]).text(title);
-    $($fileRow.find("td")[2]).empty().append(TSCORE.generateTagButtons(fileTags, newFilePath));
-
-    this.refreshThumbnails();
-
-  };
+    });
+  }
 
   exports.initUI = initUI;
   exports.load = load;
-
+  exports.updateFileUI = updateFileUI;
 });
