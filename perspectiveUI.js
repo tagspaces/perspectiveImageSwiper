@@ -45,7 +45,6 @@ define(function(require, exports, module) {
        TSCORE.showAddTagsDialog();
      });
     }, 500));
-
   }
 
   function load(container, template, showAllResult) {
