@@ -31,14 +31,14 @@ define(function(require, exports, module) {
         "marked",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
-        "css!" + extensionDirectory + "/extension.css",              
+        "css!" + extensionDirectory + "/extension.css",
         ], function(perspectiveUI, tmpl, marked) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
-          
+
           $('#' + extensionID + 'Container [data-i18n]').i18n();
-          
+
           resolve(true);
         }
       );
@@ -51,7 +51,7 @@ define(function(require, exports, module) {
       UI.load($viewContainer, template);
       TSCORE.hideLoadingAnimation();
       try {
-        require(["marked"], function(marked) {  
+        require(["marked"], function(marked) {
           $('#aboutExtensionModalImageSwiper').on('show.bs.modal', function() {
             $.ajax({
               url: extensionDirectory + '/README.md',
@@ -65,20 +65,20 @@ define(function(require, exports, module) {
                 handleLinks(modalBody);
               } else {
                 console.log("markdown to html transformer not found");
-              }                  
+              }
             })
             .fail(function(data) {
               console.warn("Loading file failed " + data);
             });
-          }); 
-        });          
+          });
+        });
       } catch (err) {
         console.log("Failed translating extension");
-      }           
-      
+      }
+
     });
   }
-  
+
   function handleLinks($element) {
     $element.find("a[href]").each(function() {
       var currentSrc = $(this).attr("href");
@@ -88,14 +88,16 @@ define(function(require, exports, module) {
         window.parent.postMessage(JSON.stringify(msg), "*");
       });
     });
-  }  
+  }
 
   function clearSelectedFiles() {}
-    
+
   function removeFileUI(filePath) {}
-    
-  function updateFileUI(oldFilePath, newFilePath) {}
-  
+
+  function updateFileUI(oldFilePath, newFilePath) {
+    UI.updateFileUI(oldFilePath, newFilePath);
+  }
+
   function getNextFile(filePath) {}
 
   function getPrevFile(filePath) {}
