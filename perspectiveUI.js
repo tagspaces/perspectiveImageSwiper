@@ -279,9 +279,12 @@ define(function(require, exports, module) {
         });
 
         gallery.listen('gettingData', function(index, item) {
-          console.log("Current image" + decodeURI(gallery.currItem.src));
-          TSCORE.selectedFiles[0] = decodeURI(gallery.currItem.src);
-          console.debug(TSCORE.selectedFiles[0]);
+          TSCORE.selectedFiles = [];
+          TSCORE.selectedFiles.push(decodeURI(gallery.currItem.src));
+        });
+
+        gallery.listen('close', function() {
+          TSCORE.selectedFiles = [];
         });
       });
     };
