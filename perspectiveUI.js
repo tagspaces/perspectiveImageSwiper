@@ -27,7 +27,6 @@ define(function(require, exports, module) {
           var $img = $(this).find('img');
           if ($img.attr("src").indexOf(defaultThumnailPath) === 0) {
             var filePath = $(this).find("a").attr("href");
-            console.log(filePath);
             if (isChrome) {
               var indexOfFile = filePath.indexOf("file://");
               if (indexOfFile === 0) {
@@ -81,7 +80,6 @@ define(function(require, exports, module) {
 
       if (supportedFileTypesThumbs.indexOf(ext) !== -1) {
         var filePath = fileInfo.path;
-        console.log(filePath);
         var encodedPath;
         if (isChrome) {
           encodedPath = encodeURI("file://" + filePath);
