@@ -303,10 +303,7 @@ define(function(require, exports, module) {
     //  TSCORE.selectedFiles.splice(TSCORE.selectedFiles.indexOf(oldFilePath), 1);
     //  TSCORE.selectedFiles.push(newFilePath);
     //}
-    var dirPath = TSCORE.currentPath;
-    TSCORE.IO.listDirectoryPromise(dirPath).then(function(entries) {
-
-    });
+    load(galContainer, galTemplate, true);
   }
 
   exports.initUI = initUI;
