@@ -1,10 +1,17 @@
 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   {{#each data}}
   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <a href="{{path}}" itemprop="contentUrl" title="{{path}}" >
-      <img src={{thumbnail}} itemprop="thumbnail">
+    <a id="imagePath" href="{{path}}" itemprop="contentUrl" title="{{path}}" >
+        <img id="imageSrc" src={{thumbnail}} itemprop="thumbnail">
     </a>
-    <figcaption itemprop="caption description">{{name}}</figcaption>
+    <figcaption itemprop="caption description">
+        <label>{{title}}</label>
+        <div class="row gallery-tags">
+            {{#each tags}}
+            <button class="btn btn-sm tagButton fileTagsTile tagButton-xs" tag="{{this}}" filepath="{{filepath}}">{{this}}</button>
+            {{/each}}
+        </div>
+    </figcaption>
   </figure>
   {{else}}
   <p style="width: 100%; margin: 5px; font-size: 13px; text-align: center;">Directory does not contain any images or is currently being analysed.</p>
@@ -32,9 +39,9 @@
                 <!--  Controls are self-explanatory. Order can be changed. -->
                 <div class="pswp__counter"></div>
                 <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
                 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
                 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <button id="imageSwipperTagButton" class="pswp__button" title="Tag" style="background-image: none;"><i style="color: white; padding-top: 5px;" class="fa fa-tag fa-2x"></i></button>
                 <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
                 <!-- element will get class pswp__preloader--active when preloader is running -->
                 <div class="pswp__preloader">
@@ -67,7 +74,7 @@
     <li class="divider"></li>
     <li><a id="aboutButton" data-toggle="modal" data-target="#aboutExtensionModalImageSwiper">
       <i class="fa fa-comment fa-lg fa-fw"></i>&nbsp;<span data-i18n="ns.perspectiveList:about">About</span>
-    </a></li>     
+    </a></li>
   </ul>
 </div>
 <div class="modal fullScreenMobile" id="aboutExtensionModalImageSwiper" tabindex="-1" role="dialog" aria-hidden="true">

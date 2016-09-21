@@ -32,8 +32,8 @@ define(function(require, exports, module) {
         "text!" + extensionDirectory + "/extension.html",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
-        "css!" + extensionDirectory + "/extension.css",              
-        ], function(perspectiveUI, tmpl) {
+        "css!" + extensionDirectory + "/extension.css",
+        ], function(perspectiveUI, tmpl, marked) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
@@ -49,27 +49,34 @@ define(function(require, exports, module) {
     extensionLoaded.then(function() {
       UI.load($viewContainer, template);
       TSCORE.hideLoadingAnimation();
-
-      if (!aboutContent) {
-        $.ajax({
-          url: extensionDirectory + '/README.md',
-          type: 'GET'
-        })
-        .done(function(mdData) {
-          if (marked) {
-            aboutContent = marked(mdData, { sanitize: true });
-            var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
-            modalBody.html(aboutContent);
-            handleLinks(modalBody);
-          }
-        })
-        .fail(function(data) {
-          console.log("Loading about content failed " + data);
+      try {
+        require(["marked"], function(marked) {
+          $('#aboutExtensionModalImageSwiper').on('show.bs.modal', function() {
+            $.ajax({
+              url: extensionDirectory + '/README.md',
+              type: 'GET'
+            })
+            .done(function(mdData) {
+              //console.log("DATA: " + mdData);
+              if (marked) {
+                var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
+                modalBody.html(marked(mdData, { sanitize: true }));
+                handleLinks(modalBody);
+              } else {
+                console.log("markdown to html transformer not found");
+              }
+            })
+            .fail(function(data) {
+              console.warn("Loading file failed " + data);
+            });
+          });
         });
+      } catch (err) {
+        console.log("Failed translating extension");
       }
     });
   }
-  
+
   function handleLinks($element) {
     $element.find("a[href]").each(function() {
       var currentSrc = $(this).attr("href");
@@ -79,14 +86,16 @@ define(function(require, exports, module) {
         window.parent.postMessage(JSON.stringify(msg), "*");
       });
     });
-  }  
+  }
 
   function clearSelectedFiles() {}
-    
+
   function removeFileUI(filePath) {}
-    
-  function updateFileUI(oldFilePath, newFilePath) {}
-  
+
+  function updateFileUI(oldFilePath, newFilePath) {
+    UI.updateFileUI(oldFilePath, newFilePath);
+  }
+
   function getNextFile(filePath) {}
 
   function getPrevFile(filePath) {}
