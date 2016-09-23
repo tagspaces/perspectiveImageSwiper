@@ -70,6 +70,7 @@
   margin-left: -1px;
 }
 
-#dialogAddTags {
+#dialogAddTags, #dialogFileRename {
   z-index: 9000;
 }
+

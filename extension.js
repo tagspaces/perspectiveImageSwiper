@@ -107,6 +107,8 @@ define(function(require, exports, module) {
 
   function setReadOnly(filePath) {
     $('#imageSwipperTagButton').hide();
+    $("#imageSwipperRenameButton").hide();
+
     $(document).off('drop dragend dragenter dragover dragleave', function(event) {
       event.preventDefault();
     });
