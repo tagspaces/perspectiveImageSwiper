@@ -20,11 +20,11 @@ define(function(require, exports, module) {
     extDir = dir;
     defaultThumnailPath = extDir + "/default.png";
 
-    $("#imageSwipperTagButton").on('click', function(){
+    $("#imageSwipperTagButton").on('click', function() {
       TSCORE.showAddTagsDialog();
     });
 
-    $("#imageSwipperRenameButton").on('click', function(){
+    $("#imageSwipperRenameButton").on('click', function() {
       TSCORE.UI.showFileRenameDialog();
     });
 
