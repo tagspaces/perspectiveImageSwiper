@@ -20,14 +20,6 @@ define(function(require, exports, module) {
     extDir = dir;
     defaultThumnailPath = extDir + "/default.png";
 
-    $("#imageSwipperTagButton").on('click', function() {
-      TSCORE.showAddTagsDialog();
-    });
-
-    $("#imageSwipperRenameButton").on('click', function() {
-      TSCORE.UI.showFileRenameDialog();
-    });
-
     // Handling thumbnails
     $('#viewContainers').on('scroll', _.debounce(function() {
       $('.my-gallery').find("figure").each(function() {
@@ -140,6 +132,14 @@ define(function(require, exports, module) {
   }
 
   function initPhotoSwipeFromDOM(gallerySelector) {
+
+    $("#imageSwipperTagButton").on('click', function() {
+      TSCORE.showAddTagsDialog();
+    });
+
+    $("#imageSwipperRenameButton").on('click', function() {
+      TSCORE.UI.showFileRenameDialog();
+    });
 
     // parse slide data (url, title, size ...) from DOM elements
     // (children of gallerySelector)
