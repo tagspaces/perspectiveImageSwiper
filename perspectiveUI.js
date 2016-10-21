@@ -123,7 +123,7 @@ define(function(require, exports, module) {
 
     //Update statusbar,
     if (data) {
-      $("#statusBar").text(data.length + " " + $.i18n.t("ns.perspectiveList:filesFound"));
+      $("#statusBar").text(data.length + " " + $.i18n.t("ns.perspectives:filesFound"));
     }
 
     var html = compiledTemplate({data: data});
