@@ -198,11 +198,11 @@ define(function(require, exports, module) {
 
   function initPhotoSwipeFromDOM(gallerySelector) {
 
-    $("#imageSwipperTagButton").on('click', function() {
+    $("#imageSwipperTagButton").on('click tap', function() {
       TSCORE.showAddTagsDialog();
     });
 
-    $("#imageSwipperRenameButton").on('click', function() {
+    $("#imageSwipperRenameButton").on('click tap', function() {
       TSCORE.UI.showFileRenameDialog();
     });
 
