@@ -6,10 +6,16 @@
   background-color: black;
 }
 
+#themeStyle {
+  margin-left: 19px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .my-gallery {
   width: 100%;
   float: left;
-  background-color: black;
+  /*background-color: black;*/
 
   display: flex;
   display: -webkit-flex;
@@ -33,9 +39,10 @@
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
 }
-.my-gallery figcaption {
-  color: whitesmoke;
-}
+
+/*.my-gallery figcaption {*/
+  /*color: whitesmoke;*/
+/*}*/
 
 #aboutExtensionModalImageSwiper img {
   max-width: 100%;
@@ -74,3 +81,17 @@
   z-index: 9000;
 }
 
+
+.btn-black {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-sepia {
+  background-color: #f4ecd8;
+  color: #5b4636;
+}
+
+.dropdown-menu {
+  width: 180px;
+}

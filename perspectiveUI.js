@@ -2,7 +2,6 @@
  * Use of this source code is governed by the MIT license which can be found in the LICENSE.txt file. */
 
 /* global define, Handlebars, isWin, _  */
-
 define(function(require, exports, module) {
   "use strict";
 
@@ -15,6 +14,27 @@ define(function(require, exports, module) {
   var galTemplate;
   var partialResult;
   var allResults;
+
+  var extSettings, galleryBackgroundColor = "#000000";
+  loadExtSettings();
+
+  if (extSettings && extSettings.galleryBackgroundColor) {
+    galleryBackgroundColor = extSettings.galleryBackgroundColor;
+  }
+
+  //save settings for viewerSettings
+  function saveExtSettings() {
+    var settings = {
+      "galleryBackgroundColor": galleryBackgroundColor
+    };
+    localStorage.setItem('perspectiveImageSwiperSettings', JSON.stringify(settings));
+    console.debug(settings);
+  }
+
+  //load settings for viewerSettings
+  function loadExtSettings() {
+    extSettings = JSON.parse(localStorage.getItem("perspectiveImageSwiperSettings"));
+  }
 
   function initUI(dir) {
     extDir = dir;
@@ -118,6 +138,41 @@ define(function(require, exports, module) {
     shouldShowAllFilesContainer ? $("#imageSwiperShowAllFileContainer").show() : $("#imageSwiperShowAllFileContainer").hide();
 
     $('#viewContainers').trigger('scroll');
+
+    // Loading gallery background
+    $(".my-gallery").css('background', galleryBackgroundColor);
+
+    if (galleryBackgroundColor !== '#000000') {
+      $(".my-gallery figcaption").css('color', '#000000');
+    } else {
+      $(".my-gallery figcaption").css('color', 'whitesmoke');
+    }
+
+    var $galleryBackground = $(".my-gallery");
+
+    $("#whiteBackgroundColor").on('click', function(e) {
+      e.stopPropagation();
+      $galleryBackground.css('background', '#ffffff');
+      $(".my-gallery figcaption").css('color', '#000000');
+      galleryBackgroundColor = "#ffffff";
+      saveExtSettings();
+    });
+
+    $("#blackBackgroundColor").on('click', function(e) {
+      e.stopPropagation();
+      $galleryBackground.css('background', '#000000');
+      $(".my-gallery figcaption").css('color', 'whitesmoke');
+      galleryBackgroundColor = "#000000";
+      saveExtSettings();
+    });
+
+    $("#sepiaBackgroundColor").on('click', function(e) {
+      e.stopPropagation();
+      $galleryBackground.css('background', '#f4ecd8');
+      $(".my-gallery figcaption").css('color', '#000000');
+      galleryBackgroundColor = "#f4ecd8";
+      saveExtSettings();
+    });
   }
 
   function loadThumbnail(fileName) {
