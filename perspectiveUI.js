@@ -28,7 +28,6 @@ define(function(require, exports, module) {
       "galleryBackgroundColor": galleryBackgroundColor
     };
     localStorage.setItem('perspectiveImageSwiperSettings', JSON.stringify(settings));
-    console.debug(settings);
   }
 
   //load settings for viewerSettings
