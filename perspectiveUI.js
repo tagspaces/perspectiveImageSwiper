@@ -22,7 +22,7 @@ define(function(require, exports, module) {
     galleryBackgroundColor = extSettings.galleryBackgroundColor;
   }
 
-  //save settings for viewerSettings
+  //save settings for perspectiveImageSwiperSettings
   function saveExtSettings() {
     var settings = {
       "galleryBackgroundColor": galleryBackgroundColor
@@ -30,7 +30,7 @@ define(function(require, exports, module) {
     localStorage.setItem('perspectiveImageSwiperSettings', JSON.stringify(settings));
   }
 
-  //load settings for viewerSettings
+  //load settings for perspectiveImageSwiperSettings
   function loadExtSettings() {
     extSettings = JSON.parse(localStorage.getItem("perspectiveImageSwiperSettings"));
   }
@@ -137,6 +137,17 @@ define(function(require, exports, module) {
     shouldShowAllFilesContainer ? $("#imageSwiperShowAllFileContainer").show() : $("#imageSwiperShowAllFileContainer").hide();
 
     $('#viewContainers').trigger('scroll');
+
+    // Init internationalization
+    $.i18n.init({
+      ns: {
+        namespaces: ['ns.perspectives']
+      },
+      debug: true,
+      fallbackLng: 'en_US'
+    }, function() {
+      $('[data-i18n]').i18n();
+    });
 
     // Loading gallery background
     $(".my-gallery").css('background', galleryBackgroundColor);

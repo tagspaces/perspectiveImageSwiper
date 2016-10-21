@@ -95,3 +95,10 @@
 .dropdown-menu {
   width: 180px;
 }
+
+.massage-p {
+  width: 100%;
+  margin: 5px;
+  font-size: 13px;
+  text-align: center;
+}
