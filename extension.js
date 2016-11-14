@@ -37,7 +37,6 @@ define(function(require, exports, module) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
-          $('#' + extensionID + 'Container [data-i18n]').i18n();
           resolve(true);
         }
       );
@@ -48,6 +47,8 @@ define(function(require, exports, module) {
     console.log("Loading perspective " + extensionID);
     extensionLoaded.then(function() {
       UI.load($viewContainer, template);
+      platformTuning();
+      $('#' + extensionID + 'Container [data-i18n]').i18n();
       TSCORE.hideLoadingAnimation();
       try {
         require(["marked"], function(marked) {
@@ -86,6 +87,13 @@ define(function(require, exports, module) {
         window.parent.postMessage(JSON.stringify(msg), "*");
       });
     });
+  }
+
+  function platformTuning() {
+    if (isCordova) {
+      $('#imageSwipperTagButton').hide();
+      $('#imageSwipperRenameButton').hide();
+    }
   }
 
   function clearSelectedFiles() {}

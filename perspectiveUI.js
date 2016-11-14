@@ -122,9 +122,9 @@ define(function(require, exports, module) {
     });
 
     //Update statusbar,
-    /*if (data) {
+    if (data) {
       $("#statusBar").text(data.length + " " + $.i18n.t("ns.perspectives:filesFound"));
-    }*/
+    }
 
     var html = compiledTemplate({data: data});
     container.append(html);
@@ -137,17 +137,6 @@ define(function(require, exports, module) {
     shouldShowAllFilesContainer ? $("#imageSwiperShowAllFileContainer").show() : $("#imageSwiperShowAllFileContainer").hide();
 
     $('#viewContainers').trigger('scroll');
-
-    // Init internationalization
-    /*$.i18n.init({
-      ns: {
-        namespaces: ['ns.perspectives']
-      },
-      debug: true,
-      fallbackLng: 'en_US'
-    }, function() {
-      $('[data-i18n]').i18n();
-    });*/
 
     // Loading gallery background
     $(".my-gallery").css('background', galleryBackgroundColor);
