@@ -99,12 +99,12 @@ define(function(require, exports, module) {
         if (isChrome) {
           encodedPath = encodeURI("file://" + filePath);
         } else {
-          encodedPath = encodeURI(filePath);
+          encodedPath = encodeURI(filePath).split('%5C').join('/').split('%3A').join(':');
         }
         var doc = {
           name: fileInfo.name,
           path: encodedPath,
-          thumbnail: encodeURI(defaultThumnailPath),
+          thumbnail: encodeURI(defaultThumnailPath).split('%5C').join('/').split('%3A').join(':'),
           title: fileInfo.title,
           tags: fileInfo.tags
         };
@@ -114,7 +114,7 @@ define(function(require, exports, module) {
           if (isChrome) {
             doc.thumbnail = encodeURI("file:///" + metaFilePath);
           } else {
-            doc.thumbnail = encodeURI(metaFilePath);
+            doc.thumbnail = encodeURI(metaFilePath).split('%5C').join('/').split('%3A').join(':');
           }
         }
         data.push(doc);
