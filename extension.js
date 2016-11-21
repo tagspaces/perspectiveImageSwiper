@@ -90,10 +90,11 @@ define(function(require, exports, module) {
   }
 
   function platformTuning() {
-    if (isCordova) {
-      $('#imageSwipperTagButton').hide();
-      $('#imageSwipperRenameButton').hide();
-    }
+    // TODO handle tap events cordova, handle key event: left & right arrows switch the image underneeth
+    // if (isCordova) {
+    $('#imageSwipperTagButton').hide();
+    $('#imageSwipperRenameButton').hide();
+    // }
   }
 
   function clearSelectedFiles() {}
