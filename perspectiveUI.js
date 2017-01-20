@@ -172,6 +172,9 @@ define(function(require, exports, module) {
       galleryBackgroundColor = "#f4ecd8";
       saveExtSettings();
     });
+
+    $('figure img').off();
+    $('figure img').on('dragstart', function(event) { event.preventDefault(); });
   }
 
   function loadThumbnail(fileName) {
