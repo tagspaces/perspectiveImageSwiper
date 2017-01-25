@@ -11,7 +11,6 @@ define(function(require, exports, module) {
   console.log("Loading " + extensionID);
 
   var TSCORE = require("tscore");
-  var marked = require('marked');
   var extensionDirectory = TSCORE.Config.getExtensionPath() + "/" + extensionID;
   var UI;
   var $viewContainer = $("#" + extensionID + "Container");
@@ -33,7 +32,7 @@ define(function(require, exports, module) {
         "css!" + extensionDirectory + "/libs/photoswipe/dist/photoswipe.css",
         "css!" + extensionDirectory + "/libs/photoswipe/dist/default-skin/default-skin.css",
         "css!" + extensionDirectory + "/extension.css",
-        ], function(perspectiveUI, tmpl, marked) {
+        ], function(perspectiveUI, tmpl) {
           UI = perspectiveUI;
           template = tmpl;
           UI.initUI(extensionDirectory);
@@ -58,14 +57,8 @@ define(function(require, exports, module) {
               type: 'GET'
             })
             .done(function(mdData) {
-              //console.log("DATA: " + mdData);
-              if (marked) {
-                var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
-                modalBody.html(marked(mdData, {sanitize: true}));
-                handleLinks(modalBody);
-              } else {
-                console.log("markdown to html transformer not found");
-              }
+              var modalBody = $("#aboutExtensionModalImageSwiper .modal-body");
+              TSCORE.Utils.setMarkDownContent(modalBody, mdData);
             })
             .fail(function(data) {
               console.warn("Loading file failed " + data);
