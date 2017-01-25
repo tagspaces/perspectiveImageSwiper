@@ -9,9 +9,7 @@ A TagSpaces extension able to display common images formats from the current fol
 * Fullscreen mode
 * Image zooming
 
-![Screenshot of the ImageSwiper extension](https://github.com/tagspaces/documentation/raw/master/media/extensions/perspective-image-swiper-lead.png)
-
-<video controls autoplay loop src="https://github.com/tagspaces/documentation/raw/master/media/extensions/perspective-image-swiper-demo.mp4">Your browser does not support the video tag.</video>
+[![Screenshot of the ImageSwiper extension](https://github.com/tagspaces/documentation/raw/master/media/extensions/perspective-image-swiper-lead.png)](https://github.com/tagspaces/documentation/raw/master/media/extensions/perspective-image-swiper-demo.mp4)
 
 ## Used libraries
 This extension thankfully relays on the following great libraries:
