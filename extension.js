@@ -102,11 +102,6 @@ define(function(require, exports, module) {
 
   function getPrevFile(filePath) {}
 
-  function updateTreeData(fsTreeData) {
-
-    console.log("Updating tree data not implemented");
-  }
-
   function setReadOnly(filePath) {
     $('#imageSwipperTagButton').hide();
     $("#imageSwipperRenameButton").hide();
@@ -129,6 +124,5 @@ define(function(require, exports, module) {
   exports.getPrevFile = getPrevFile;
   exports.removeFileUI = removeFileUI;
   exports.updateFileUI = updateFileUI;
-  exports.updateTreeData = updateTreeData;
   exports.setReadOnly = setReadOnly;
 });
