@@ -62,6 +62,10 @@ define(function(require, exports, module) {
   }
 
   function load(container, template, showAllResult) {
+    if (!container || !template) {
+      return;
+    }
+
     galContainer = container;
     galTemplate = template;
 
